@@ -8,7 +8,7 @@ defmodule BroadwaySqsPlaygroundWeb.Router do
   scope "/api", BroadwaySqsPlaygroundWeb do
     pipe_through :api
 
-    post "/send-message", MessagesController, :create
+    post "/send-message", MessagesController, :send_message
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
