@@ -9,14 +9,16 @@ defmodule BroadwaySqsPlayground.Application do
   def start(_type, _args) do
     children = [
       BroadwaySqsPlaygroundWeb.Telemetry,
-      {DNSCluster, query: Application.get_env(:broadway_sqs_playground, :dns_cluster_query) || :ignore},
+      {DNSCluster,
+       query: Application.get_env(:broadway_sqs_playground, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: BroadwaySqsPlayground.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: BroadwaySqsPlayground.Finch},
       # Start a worker by calling: BroadwaySqsPlayground.Worker.start_link(arg)
       # {BroadwaySqsPlayground.Worker, arg},
       # Start to serve requests, typically the last entry
-      BroadwaySqsPlaygroundWeb.Endpoint
+      BroadwaySqsPlaygroundWeb.Endpoint,
+      {BroadwaySqsPlayground.Pipeline.Broadway, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

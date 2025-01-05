@@ -23,7 +23,12 @@ defmodule BroadwaySqsPlaygroundWeb.Router do
     scope "/dev" do
       pipe_through [:fetch_session, :protect_from_forgery]
 
-      live_dashboard "/dashboard", metrics: BroadwaySqsPlaygroundWeb.Telemetry
+      live_dashboard "/dashboard",
+        metrics: BroadwaySqsPlaygroundWeb.Telemetry,
+        additional_pages: [
+          broadway: {BroadwayDashboard, pipelines: [BroadwaySqsPlayground.Pipeline.Broadway]}
+        ]
+
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
