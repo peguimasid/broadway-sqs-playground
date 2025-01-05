@@ -1,0 +1,1 @@
+localstack start -d
