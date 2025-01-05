@@ -41,7 +41,13 @@ defmodule BroadwaySqsPlayground.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:poison, "~> 6.0"},
+      {:ex_aws, "~> 2.5"},
+      {:ex_aws_sqs, "~> 3.4"},
+      {:hackney, "~> 1.20"},
+      {:broadway_sqs, "~> 0.7.4"},
+      {:broadway_dashboard, "~> 0.4.1"}
     ]
   end
 
