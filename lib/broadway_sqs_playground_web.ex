@@ -42,7 +42,7 @@ defmodule BroadwaySqsPlaygroundWeb do
         layouts: [html: BroadwaySqsPlaygroundWeb.Layouts]
 
       import Plug.Conn
-      import BroadwaySqsPlaygroundWeb.Gettext
+      use Gettext, backend: BroadwaySqsPlaygroundWeb.Gettext
 
       unquote(verified_routes())
     end

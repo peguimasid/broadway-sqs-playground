@@ -20,5 +20,5 @@ defmodule BroadwaySqsPlaygroundWeb.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :broadway_sqs_playground
+  use Gettext.Backend, otp_app: :broadway_sqs_playground
 end
