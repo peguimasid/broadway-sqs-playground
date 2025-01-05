@@ -11,7 +11,7 @@ defmodule BroadwaySqsPlaygroundWeb.MessagesController do
     ]
 
     queue_url = "http://localhost:4566/000000000000/sqs-demo"
-    message = Poison.encode!(%{"foo" => "bar"})
+    message = JSON.encode!(%{"foo" => "bar"})
 
     queue_url
     |> ExAws.SQS.send_message(message)
