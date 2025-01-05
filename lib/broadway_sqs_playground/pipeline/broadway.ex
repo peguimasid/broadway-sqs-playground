@@ -28,14 +28,37 @@ defmodule BroadwaySqsPlayground.Pipeline.Broadway do
     )
   end
 
-  @impl true
-  def handle_message(_, %Message{data: data} = message, _) do
+  def prepare_messages(messages, _context) do
+    messages =
+      Enum.map(messages, fn message ->
+        Message.update_data(message, &JSON.decode/1)
+      end)
+
+    messages
+  end
+
+  def handle_message(_, %Message{data: {:ok, data}} = message, _) do
     IO.inspect(data, label: "******* Message ********** ")
 
     message
   end
 
-  @impl true
+  def handle_message(_, %Message{data: {:error, err}} = message, _) do
+    IO.puts("#{inspect(self())} Handling parsing error: #{inspect(err)}")
+    Message.failed(message, :invalid_data)
+  end
+
+  def handle_failed(messages, _context) do
+    IO.puts("Messages in failed stage: #{inspect(messages)}")
+
+    Enum.map(messages, fn
+      %{status: {:failed, :invalid_data}} = message ->
+        IO.puts("ACK invalid message and log error: #{inspect(message.data)}")
+        Message.configure_ack(message, on_failure: :ack)
+        message
+    end)
+  end
+
   def handle_batch(_, messages, _, _) do
     messages
   end
