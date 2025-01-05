@@ -31,14 +31,16 @@ defmodule BroadwaySqsPlayground.Pipeline.Broadway do
   def prepare_messages(messages, _context) do
     messages =
       Enum.map(messages, fn message ->
-        Message.update_data(message, &JSON.decode/1)
+        Message.update_data(message, fn data ->
+          JSON.decode(data)
+        end)
       end)
 
     messages
   end
 
   def handle_message(_, %Message{data: {:ok, data}} = message, _) do
-    IO.inspect(data, label: "******* Message ********** ")
+    IO.inspect(data, label: "******* Message **********")
 
     message
   end
