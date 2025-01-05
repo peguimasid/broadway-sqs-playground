@@ -47,7 +47,8 @@ defmodule BroadwaySqsPlayground.MixProject do
       {:ex_aws_sqs, "~> 3.4"},
       {:hackney, "~> 1.20"},
       {:broadway_sqs, "~> 0.7.4"},
-      {:broadway_dashboard, "~> 0.4.1"}
+      {:broadway_dashboard, "~> 0.4.1"},
+      {:elixir_uuid, "~> 1.2"}
     ]
   end
 

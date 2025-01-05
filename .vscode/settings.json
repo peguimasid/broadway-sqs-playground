@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["awslocal", "broadway", "initaws", "jason", "localstack"]
+  "cSpell.words": [
+    "awslocal",
+    "broadway",
+    "initaws",
+    "jason",
+    "localstack",
+    "uuid"
+  ]
 }

@@ -11,12 +11,17 @@ defmodule BroadwaySqsPlaygroundWeb.MessagesController do
     ]
 
     queue_url = "http://localhost:4566/000000000000/sqs-demo"
-    message = JSON.encode!(%{"foo" => "bar"})
+    message = JSON.encode!(%{"id" => UUID.uuid4(), "message" => "Hello"})
 
-    queue_url
-    |> ExAws.SQS.send_message(message)
-    |> ExAws.request!(config)
+    response =
+      queue_url
+      |> ExAws.SQS.send_message(message)
+      |> ExAws.request!(config)
 
-    conn |> json(%{success: true})
+    conn
+    |> json(%{
+      success: true,
+      message_id: response[:body][:message_id]
+    })
   end
 end
