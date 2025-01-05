@@ -20,7 +20,7 @@ defmodule BroadwaySqsPlayground.Pipeline.Broadway do
         }
       ],
       processors: [
-        default: []
+        default: [concurrency: 5]
       ],
       batchers: [
         default: []
